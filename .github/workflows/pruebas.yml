@@ -1,0 +1,45 @@
+# Integración continua: ejecuta toda la suite de pruebas en cada push y pull request.
+# Funciona como prueba de regresión automática: si algo que funcionaba se rompe, el check falla.
+name: Pruebas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  unitarias-e-integracion:
+    name: Unitarias e integración (Jest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run test:coverage
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cobertura
+          path: coverage/
+
+  sistema-aceptacion:
+    name: Sistema, aceptación, seguridad y usabilidad (Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reporte-playwright
+          path: playwright-report/
