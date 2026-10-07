@@ -166,10 +166,10 @@ REPOSITORIO/
 
 Desarrollo con **Scrum** e incrementos por módulo. Las pruebas se diseñaron principalmente como **caja negra** (partición de equivalencia, valores límite, tablas de decisión y transición de estados) en siete tipos: funcionales, integración, sistema, aceptación, regresión, usabilidad y seguridad.
 
-## Integrantes
+## Integrantes — Grupo 3
 
 | Nombre | Carné |
 |---|---|
-| | |
-| | |
-| | |
+| Harry Eduardo Cardona Pérez | 5190-22-12305 |
+| Pablo Alejandro Pérez Vásquez | 5190-22-10933 |
+| William Fernando López | 5190-11-7240 |
